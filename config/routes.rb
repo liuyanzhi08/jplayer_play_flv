@@ -1,3 +1,5 @@
 JplayerPlayFlv::Application.routes.draw do
-  root :to => "home#index"
+  resources :videos
+
+  root :to => "videos#index"
 end

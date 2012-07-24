@@ -1,0 +1,76 @@
+- content_for :head do
+  = stylesheet_link_tag "/skin/pink/jplayer.pink.flag.css"
+  = javascript_include_tag "/js/jquery.jplayer.min.js"
+  :javascript
+    $(document).ready(function(){
+      $("#jquery_jplayer_1").jPlayer({
+        ready: function () {
+          $(this).jPlayer("setMedia", {
+            flv: "#{@video.file_url}",
+            poster: "http://www.jplayer.org/video/poster/Big_Buck_Bunny_Trailer_480x270.png"
+          });
+        },
+        swfPath: "/js",
+        supplied: "flv"
+      });
+    });
+
+%p#notice= notice
+
+%p
+  %b Name:
+  = @video.name
+%p
+  %b File:
+  = @video.file_url
+
+= link_to 'Edit', edit_video_path(@video)
+\|
+= link_to 'Back', videos_path
+
+#jp_container_1.jp-video
+  .jp-type-single
+    #jquery_jplayer_1.jp-jplayer
+    .jp-gui
+      .jp-video-play
+        %a.jp-video-play-icon{:href => "javascript:;", :tabindex => "1"} play
+      .jp-interface
+        .jp-progress
+          .jp-seek-bar
+            .jp-play-bar
+        .jp-current-time
+        .jp-duration
+        .jp-controls-holder
+          %ul.jp-controls
+            %li
+              %a.jp-play{:href => "javascript:;", :tabindex => "1"} play
+            %li
+              %a.jp-pause{:href => "javascript:;", :tabindex => "1"} pause
+            %li
+              %a.jp-stop{:href => "javascript:;", :tabindex => "1"} stop
+            %li
+              %a.jp-mute{:href => "javascript:;", :tabindex => "1", :title => "mute"} mute
+            %li
+              %a.jp-unmute{:href => "javascript:;", :tabindex => "1", :title => "unmute"} unmute
+            %li
+              %a.jp-volume-max{:href => "javascript:;", :tabindex => "1", :title => "max volume"} max volume
+          .jp-volume-bar
+            .jp-volume-bar-value
+          %ul.jp-toggles
+            %li
+              %a.jp-full-screen{:href => "javascript:;", :tabindex => "1", :title => "full screen"} full screen
+            %li
+              %a.jp-restore-screen{:href => "javascript:;", :tabindex => "1", :title => "restore screen"} restore screen
+            %li
+              %a.jp-repeat{:href => "javascript:;", :tabindex => "1", :title => "repeat"} repeat
+            %li
+              %a.jp-repeat-off{:href => "javascript:;", :tabindex => "1", :title => "repeat off"} repeat off
+        .jp-title
+          %ul
+            %li Big Buck Bunny Trailer
+    .jp-no-solution
+      %span Update Required
+      To play the media you will need to either update your browser to a recent version or update your
+      = succeed "." do
+        %a{:href => "http://get.adobe.com/flashplayer/", :target => "_blank"} Flash plugin
+
